@@ -38,7 +38,28 @@ def WitAi(r, witKey):
     	print("Could not request results from Wit.ai service; {0}".format(e))
 
 def bingVoice(r,bingKey):
-	
+	try:
+    	print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=BING_KEY))
+	except sr.UnknownValueError:
+   		print("Microsoft Bing Voice Recognition could not understand audio")
+	except sr.RequestError as e:
+    	print("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
+
+def AI(r, aiKey):
+	try:
+    	print("api.ai thinks you said " + r.recognize_api(audio, client_access_token=API_AI_CLIENT_ACCESS_TOKEN))
+	except sr.UnknownValueError:
+   		print("api.ai could not understand audio")
+	except sr.RequestError as e:
+    	print("Could not request results from api.ai service; {0}".format(e))
+
+def IBM(r, username, password):
+	try:
+    	print("IBM Speech to Text thinks you said " + r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD))
+	except sr.UnknownValueError:
+   		print("IBM Speech to Text could not understand audio")
+	except sr.RequestError as e:
+    	print("Could not request results from IBM Speech to Text service; {0}".format(e))
 
 if __name__ == "__main__":
 	readJson(sys.argv[1])
