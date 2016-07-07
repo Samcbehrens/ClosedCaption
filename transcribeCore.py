@@ -6,8 +6,11 @@ from os import path
 
 
 
-def test():
-	print "This is working"
+def printByResponseType(response, showMore):
+	if showMore:
+		pprint(response)
+	else:
+		print response
 
 def readJson(jsonFile):
 	with open(jsonFile) as data_file:    
@@ -27,7 +30,7 @@ def setAudioSource(audioFile,r):
 		audio = r.record(source) # read the entire audio file
 	return audio
 
-def googleSpeech(googleKey, r, audio):
+def googleSpeech(googleKey, r, audio,showMore):
 	try:
 		# for testing purposes, we're just using the default API key
 		# to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
@@ -38,33 +41,44 @@ def googleSpeech(googleKey, r, audio):
 	except sr.RequestError as e:
 		print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-def witAi(witKey,r, audio):
+def witAi(witKey,r, audio,showMore):
 	try:
-		print("Wit.ai thinks you said " + r.recognize_wit(audio, key = witKey))
+		print "witAi"
+		response = r.recognize_wit(audio, key=witKey, show_all=showMore)
+		printByResponseType(response,showMore)
+
 	except sr.UnknownValueError:
 		print("Wit.ai could not understand audio")
 	except sr.RequestError as e:
 		print("Could not request results from Wit.ai service; {0}".format(e))
 
-def bingVoice(bingKey,r, audio):
+def bingVoice(bingKey,r, audio,showMore):
 	try:
-		print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=bingKey))
+		print "bing"
+		response = r.recognize_bing(audio, key=bingKey,show_all=showMore)
+		printByResponseType(response,showMore)
+
 	except sr.UnknownValueError:
 		print("Microsoft Bing Voice Recognition could not understand audio")
 	except sr.RequestError as e:
 		print("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
 
-def AI(aiKey,r, audio):
+def AI(aiKey,r, audio,showMore):
 	try:
-		print("api.ai thinks you said " + r.recognize_api(audio, client_access_token=aiKey))
+		print "AI"
+		response = r.recognize_api(audio, client_access_token=aiKey,show_all=showMore)
+		printByResponseType(response,showMore)
 	except sr.UnknownValueError:
 		print("api.ai could not understand audio")
 	except sr.RequestError as e:
 		print("Could not request results from api.ai service; {0}".format(e))
 
-def IBM(username, password,r, audio):
+def IBM(username, password,r, audio,showMore):
 	try:
-		print("IBM Speech to Text thinks you said " + r.recognize_ibm(audio, username=username, password=password))
+		print "IBM"
+		response = r.recognize_ibm(audio, username=username, password=password,show_all=showMore)
+		printByResponseType(response,showMore)
+
 	except sr.UnknownValueError:
 		print("IBM Speech to Text could not understand audio")
 	except sr.RequestError as e:
