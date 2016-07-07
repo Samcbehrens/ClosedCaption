@@ -4,6 +4,8 @@ import sys
 import speech_recognition as sr
 from os import path
 
+
+
 def test():
 	print "This is working"
 
@@ -16,13 +18,16 @@ def setAudioFile(audioFileName):
 	audioFile = path.join(path.dirname(path.realpath(__file__)), audioFileName)
 	return audioFile
 
-def audioSource(audioFile):
+def setRecognizer():
 	r = sr.Recognizer()
+	return r 
+
+def setAudioSource(audioFile,r):
 	with sr.AudioFile(audioFile) as source:
 		audio = r.record(source) # read the entire audio file
-	return r  
+	return audio
 
-def googleSpeech(r, googleKey):
+def googleSpeech(googleKey, r, audio):
 	try:
 		# for testing purposes, we're just using the default API key
 		# to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
@@ -33,7 +38,7 @@ def googleSpeech(r, googleKey):
 	except sr.RequestError as e:
 		print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
-def witAi(r, witKey):
+def witAi(witKey,r, audio):
 	try:
 		print("Wit.ai thinks you said " + r.recognize_wit(audio, key = witKey))
 	except sr.UnknownValueError:
@@ -41,7 +46,7 @@ def witAi(r, witKey):
 	except sr.RequestError as e:
 		print("Could not request results from Wit.ai service; {0}".format(e))
 
-def bingVoice(r,bingKey):
+def bingVoice(bingKey,r, audio):
 	try:
 		print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=BING_KEY))
 	except sr.UnknownValueError:
@@ -49,7 +54,7 @@ def bingVoice(r,bingKey):
 	except sr.RequestError as e:
 		print("Could not request results from Microsoft Bing Voice Recognition service; {0}".format(e))
 
-def AI(r, aiKey):
+def AI(aiKey,r, audio):
 	try:
 		print("api.ai thinks you said " + r.recognize_api(audio, client_access_token=API_AI_CLIENT_ACCESS_TOKEN))
 	except sr.UnknownValueError:
@@ -57,7 +62,7 @@ def AI(r, aiKey):
 	except sr.RequestError as e:
 		print("Could not request results from api.ai service; {0}".format(e))
 
-def IBM(r, username, password):
+def IBM(username, password,r, audio):
 	try:
 		print("IBM Speech to Text thinks you said " + r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD))
 	except sr.UnknownValueError:
