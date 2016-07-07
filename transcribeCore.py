@@ -48,7 +48,7 @@ def witAi(witKey,r, audio):
 
 def bingVoice(bingKey,r, audio):
 	try:
-		print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=BING_KEY))
+		print("Microsoft Bing Voice Recognition thinks you said " + r.recognize_bing(audio, key=bingKey))
 	except sr.UnknownValueError:
 		print("Microsoft Bing Voice Recognition could not understand audio")
 	except sr.RequestError as e:
@@ -56,7 +56,7 @@ def bingVoice(bingKey,r, audio):
 
 def AI(aiKey,r, audio):
 	try:
-		print("api.ai thinks you said " + r.recognize_api(audio, client_access_token=API_AI_CLIENT_ACCESS_TOKEN))
+		print("api.ai thinks you said " + r.recognize_api(audio, client_access_token=aiKey))
 	except sr.UnknownValueError:
 		print("api.ai could not understand audio")
 	except sr.RequestError as e:
@@ -64,7 +64,7 @@ def AI(aiKey,r, audio):
 
 def IBM(username, password,r, audio):
 	try:
-		print("IBM Speech to Text thinks you said " + r.recognize_ibm(audio, username=IBM_USERNAME, password=IBM_PASSWORD))
+		print("IBM Speech to Text thinks you said " + r.recognize_ibm(audio, username=username, password=password))
 	except sr.UnknownValueError:
 		print("IBM Speech to Text could not understand audio")
 	except sr.RequestError as e:

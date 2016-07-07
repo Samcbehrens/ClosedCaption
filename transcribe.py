@@ -19,6 +19,19 @@ if __name__ == "__main__":
 	r = core.setRecognizer()
 	audioSource = setupForTrans(newAudioName,r)
 
-	witKey = data["service"]["Wit"]["key"]
-	witKey=yaml.safe_load(witKey)
+
+	witKey = yaml.safe_load(data["service"]["Wit"]["key"])
 	core.witAi(witKey,r, audioSource)
+
+	bingKey = yaml.safe_load(data["service"]["Bing"]["key1"])
+	core.bingVoice(bingKey,r,audioSource)
+
+	aiKey = yaml.safe_load(data["service"]["Ai"]["key"])
+	core.AI(aiKey, r, audioSource)
+
+	IBMUsername = yaml.safe_load(data["service"]["IBM"]["username"])
+	IBMPassword = yaml.safe_load(data["service"]["IBM"]["password"])
+	core.IBM(IBMUsername, IBMPassword, r, audioSource)
+
+
+
