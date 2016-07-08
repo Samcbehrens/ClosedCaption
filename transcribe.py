@@ -20,18 +20,18 @@ if __name__ == "__main__":
 	audioSource = setupForTrans(newAudioName,r)
 
 
-	witKey = yaml.safe_load(data["service"]["Wit"]["key"])
-	core.witAi(witKey,r, audioSource, False)
+	# witKey = yaml.safe_load(data["service"]["Wit"]["key"])
+	# core.witAi(witKey,r, audioSource, False)
 
-	bingKey = yaml.safe_load(data["service"]["Bing"]["key1"])
-	core.bingVoice(bingKey,r,audioSource,False)
+	# bingKey = yaml.safe_load(data["service"]["Bing"]["key1"])
+	# core.bingVoice(bingKey,r,audioSource,False)
 
-	aiKey = yaml.safe_load(data["service"]["Ai"]["key"])
-	core.AI(aiKey, r, audioSource, False)
+	# aiKey = yaml.safe_load(data["service"]["Ai"]["key"])
+	# core.AI(aiKey, r, audioSource, False)
 
 	IBMUsername = yaml.safe_load(data["service"]["IBM"]["username"])
 	IBMPassword = yaml.safe_load(data["service"]["IBM"]["password"])
-	core.IBM(IBMUsername, IBMPassword, r, audioSource, False)
+	core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
 
 
 
