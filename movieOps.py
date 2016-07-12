@@ -9,5 +9,6 @@ def extractAudio(videoPath, newFileName):
 	# extract = "ffmpeg -i audioPath ab 160k -ac 2 -ar 44100 -vn newFileName.wav"
 	sp.call(extract, shell = True)
 
-if __name__ == "__main__":
-	extractAudio(sys.argv[1], sys.argv[2])
+def addCaptionToVideo(originalMovie,captionFile,outFileName):
+	addCommand = "ffmpeg -i " + originalMovie + " -f srt -i " + captionFile + " -c:v copy -c:a copy -c:s mov_text "+ outFileName
+	sp.call(addCommand, shell = True)
