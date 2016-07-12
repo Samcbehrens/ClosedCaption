@@ -78,7 +78,7 @@ def IBM(username, password,r, audio,showMore):
 		print "IBM"
 		response = r.recognize_ibm(audio, username=username, password=password,show_all=showMore)
 		printByResponseType(response,showMore)
-
+		return(response)
 	except sr.UnknownValueError:
 		print("IBM Speech to Text could not understand audio")
 	except sr.RequestError as e:

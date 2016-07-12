@@ -2,6 +2,8 @@ import transcribeCore as core
 import seperateAudio as seperate
 import sys 
 import yaml
+import parseResponse as p
+from pprint import pprint
 
 def setupForTrans(audioFileName,r):
 	audioFile = core.setAudioFile(audioFileName)
@@ -31,7 +33,9 @@ if __name__ == "__main__":
 
 	IBMUsername = yaml.safe_load(data["service"]["IBM"]["username"])
 	IBMPassword = yaml.safe_load(data["service"]["IBM"]["password"])
-	core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
-
+	results = core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
+	resultCore = results['results'][0]['alternatives'][0]['timestamps']
+	print "TEST"
+	print resultCore
 
 
