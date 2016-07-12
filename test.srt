@@ -1,0 +1,22 @@
+1
+00:00:00,000 --> 00:01:00,000
+Once upon a time,
+
+2
+00:01:00,000 --> 00:02:00,000
+there was a SubRip file
+with two subtitles.
+"""
+
+3
+00:00:00,000 --> 00:00:00,110
+we
+
+4
+00:00:00,430 --> 00:00:00,830
+want to be as happy
+
+5
+00:00:01,290 --> 00:00:01,620
+as that lady wearing the  two bottom
+

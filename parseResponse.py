@@ -1,10 +1,17 @@
+
+def createSubObject(sentence, startTime, endTime):
+	subtitleObject = [sentence, startTime, endTime]
+	return subtitleObject
+
+def addToSentence(subArray, appendPhrase):
+	subArray[len(subArray)-1][0] = subArray[len(subArray)-1][0]+" "+appendPhrase
+
 def parse(postResponse):
 	postResponse = postResponse['results'][0]['alternatives'][0]['timestamps']
 	print postResponse
 
 
 	sentence  = ""
-	subtitleObject = []
 	subtitleArray = []
 	startTime = 0
 
@@ -12,34 +19,34 @@ def parse(postResponse):
 		
 
 		if i % 5 == 0:
-
-			subtitleArray.append(subtitleObject)
-
-			subtitleObject = []
+			print "in if "
+			print sentence
+			print subtitleArray
 
 			sentence = sentence+ " " + postResponse[i][0]
 
-			subtitleObject.append(sentence)
-			subtitleObject.append(startTime)
-			subtitleObject.append(postResponse[i][2])
+			subtitleObject = createSubObject(sentence, startTime,postResponse[i][2] )
+			subtitleArray.append(subtitleObject)
 
 			sentence = ""
 
 		elif i == len(postResponse)-1:
-			
+			print "in else if "
+			print sentence
+			print subtitleArray
+
 			sentence = sentence+ " " + postResponse[i][0]
-			subtitleObject.append(sentence)
-			subtitleObject.append(startTime)
-			subtitleObject.append(postResponse[i][2])
-			subtitleArray.append(subtitleObject)
+			addToSentence(subtitleArray, sentence)
 
 		else:
-		
+			print("in else")
+			print sentence
+			print subtitleArray
+
 			startTime = postResponse[i][1]
 			sentence = sentence+ " " + postResponse[i][0]
 			
 
-	subtitleArray.remove([])	
 	return subtitleArray
 	
 	
