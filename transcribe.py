@@ -5,6 +5,7 @@ import yaml
 import parseResponse as p
 from pprint import pprint
 from parseResponse import parse
+import createSubtitles as sub
 
 def setupForTrans(audioFileName,r):
 	audioFile = core.setAudioFile(audioFileName)
@@ -36,7 +37,7 @@ if __name__ == "__main__":
 	IBMPassword = yaml.safe_load(data["service"]["IBM"]["password"])
 	results = core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
 	parsed = parse(results)
+	finalTranscript = sub.createTranscript(parsed, "test.srt")
 
-	
 
 

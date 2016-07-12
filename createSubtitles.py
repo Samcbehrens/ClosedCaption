@@ -13,8 +13,6 @@ def createEvent(content,start, end, ):
 
 def addEvent(i, event):
 	global subs  
-	print "in add event"
-	print event
 	subs.insert(i, event)
 
 def createTranscript(subtitleArray, captionFinalTitle):
@@ -22,7 +20,6 @@ def createTranscript(subtitleArray, captionFinalTitle):
 
 	for x in range(len(subtitleArray)):
 		event = createEvent(subtitleArray[x][0], subtitleArray[x][1], subtitleArray[x][2])
-		print event 
 		addEvent(x, event)
 	
 	saveTranscript(captionFinalTitle)
