@@ -68,13 +68,17 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 	longestArray = len(max(apiWordArray, key=len))
 
 	## create array 
-	words = [None]*longestArray
+	words = [[]]*longestArray
+	print "words"
+	print words
 
 	for key,arraysByLength in groupby(sorted(apiWordArray, key=len), key=len):
 		for array in arraysByLength:
 			print "array"
 			print array
 			for i, item in enumerate(array):
-				print item 
+				words[i].append(item)
+	print "THIS IS WORDSS ARRAY" 
+	print words 
 
 	
