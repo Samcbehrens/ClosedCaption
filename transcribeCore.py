@@ -46,6 +46,7 @@ def witAi(witKey,r, audio,showMore):
 		print "witAi"
 		response = r.recognize_wit(audio, key=witKey, show_all=showMore)
 		printByResponseType(response,showMore)
+		return response
 
 	except sr.UnknownValueError:
 		print("Wit.ai could not understand audio")
@@ -56,7 +57,8 @@ def bingVoice(bingKey,r, audio,showMore):
 	try:
 		print "bing"
 		response = r.recognize_bing(audio, key=bingKey,show_all=showMore)
-		printByResponseType(response,showMore)
+		printByResponseType(response,showMore)		
+		return response
 
 	except sr.UnknownValueError:
 		print("Microsoft Bing Voice Recognition could not understand audio")
@@ -68,6 +70,7 @@ def AI(aiKey,r, audio,showMore):
 		print "AI"
 		response = r.recognize_api(audio, client_access_token=aiKey,show_all=showMore)
 		printByResponseType(response,showMore)
+		return response
 	except sr.UnknownValueError:
 		print("api.ai could not understand audio")
 	except sr.RequestError as e:
