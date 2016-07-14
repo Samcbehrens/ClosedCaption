@@ -62,23 +62,23 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 	aiDict3 = createDictionary(aiArray3, aiConf3)
 
 	apiWordArray = [ibmDict, bingDict, aiDict1, aiDict2, aiDict3, witDict]
-	print apiWordArray
 
 	#find longest one
 	longestArray = len(max(apiWordArray, key=len))
 
+	foo = None
 	## create array 
-	words = [[]]*longestArray
-	print "words"
-	print words
+	words=[[foo for i in range(longestArray)] for j in range(longestArray)]
+
 
 	for key,arraysByLength in groupby(sorted(apiWordArray, key=len), key=len):
-		for array in arraysByLength:
+		for bigIndex, array in enumerate(arraysByLength):
 			print "array"
 			print array
-			for i, item in enumerate(array):
-				words[i].append(item)
-	print "THIS IS WORDSS ARRAY" 
-	print words 
+			for littleIndex, item in enumerate(array):
+				words[littleIndex][bigIndex] = item 
+				print "CHICKEN FINGERS"
+				print words
+			
 
 	
