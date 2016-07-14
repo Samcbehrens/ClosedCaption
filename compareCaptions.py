@@ -68,17 +68,18 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 
 	foo = None
 	## create array 
-	words=[[foo for i in range(longestArray)] for j in range(longestArray)]
+	words=[[foo for i in range(len(apiWordArray))] for j in range(longestArray)]
 
 
-	for key,arraysByLength in groupby(sorted(apiWordArray, key=len), key=len):
-		for bigIndex, array in enumerate(arraysByLength):
-			print "array"
-			print array
-			for littleIndex, item in enumerate(array):
-				words[littleIndex][bigIndex] = item 
-				print "CHICKEN FINGERS"
-				print words
-			
+	for bigIndex, array in enumerate(apiWordArray):
+		print "FROGGY"
+		print array
+		for littleIndex, item in enumerate(array):
+			words[littleIndex][bigIndex] = item 
+			print "big Index", bigIndex
+			print "little Index", littleIndex
 
+	print "FINAL OUTCOME"
+
+	print words
 	
