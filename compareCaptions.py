@@ -72,14 +72,9 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 
 
 	for bigIndex, array in enumerate(apiWordArray):
-		print "FROGGY"
-		print array
 		for littleIndex, item in enumerate(array):
 			words[littleIndex][bigIndex] = item 
-			print "big Index", bigIndex
-			print "little Index", littleIndex
 
-	print "FINAL OUTCOME"
 
-	print words
+
 	
