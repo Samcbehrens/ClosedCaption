@@ -78,7 +78,7 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 	finalWords = [];
 	for wordGroup in words:
 		chosenWord = chooseCorrectWord(wordGroup)
-		finalWords.push(chosenWord)
+		finalWords.append(chosenWord)
 
 def chooseCorrectWord(ArrayDictionaries):
 	singleWords = [d['word'] for d in ArrayDictionaries]
@@ -91,9 +91,11 @@ def chooseCorrectWord(ArrayDictionaries):
 		else:
 			grouped = createGroups(ArrayDictionaries);
 			findWords = createSum(grouped)
+			print findWords
 			chosen = sorted(findWords, key = lambda k:k['sum']) 
 			chosen = chosen[0]
-
+			print chosen['word'] 
+			return chosen
 def createGroups(ArrayDictionaries): 
 	itemsByWord = collections.defaultdict(list)
 	for item  in ArrayDictionaries:
