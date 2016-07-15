@@ -39,7 +39,7 @@ if __name__ == "__main__":
 	ibmResults = core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
 
 	results = comp.compareResults(witResults, bingResults, aiResults, ibmResults);
-
+	
 	# parsed = parse(results)
 
 	# captionFile = "test.srt"

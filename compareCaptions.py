@@ -1,5 +1,5 @@
 from itertools import groupby
-
+import collections
 
 def getIBMObjects(ibmResults):
 	result = {"transcript" : ibmResults['results'][0]['alternatives'][0]['transcript'], "confidence": ibmResults['results'][0]['alternatives'][0]['confidence'], "wordConfidence" : ibmResults['results'][0]['alternatives'][0]['word_confidence'] }
@@ -70,11 +70,44 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 	## create array 
 	words=[[foo for i in range(len(apiWordArray))] for j in range(longestArray)]
 
-
 	for bigIndex, array in enumerate(apiWordArray):
 		for littleIndex, item in enumerate(array):
 			words[littleIndex][bigIndex] = item 
-
-
-
+	print words
 	
+	finalWords = [];
+	for wordGroup in words:
+		chosenWord = chooseCorrectWord(wordGroup)
+		finalWords.push(chosenWord)
+
+def chooseCorrectWord(ArrayDictionaries):
+	singleWords = [d['word'] for d in ArrayDictionaries]
+
+	if(all(x==singleWords[0] for x in singleWords)):
+		 return singleWords[0]
+	else: 
+		itemsByWord = collection.defaultdict(list)
+
+	for item in ArrayDictionaries:
+		itemsByWord[item['word']].append(item)
+
+	if (singleWords.count(None)>3):
+		return None
+
+def createGroups(ArrayDictionaries): 
+	itemsByWord = collection.defaultdict(list)
+	for item  in ArrayDictionaries:
+		itemsByWord[item['word']].append(item)
+	return itemsByWord
+
+def createSum(groupedItems): 
+	wieghtedAvg = [0] * len(groupedItems) 
+	counter = 0; 
+
+	for k,v in groupedItems.iteritems():
+		counter = counter+1;
+		print counter 
+		for item in v: 
+			wieghtedAvg[counter] = wieghtedAvg[counter] + item['confidence']
+
+
