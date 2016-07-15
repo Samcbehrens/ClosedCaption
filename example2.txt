@@ -1,0 +1,4 @@
+import compareCaptions as cc
+results = [{'confidence': 0.5557202757989108, 'word': u'we'}, {'confidence': u'0.9016268', 'word': u'i'}, {'confidence': 0.889059, 'word': u'i'}, {'confidence': 0.8889241, 'word': u'i'}, {'confidence': 0.8885728, 'word': u'i'}, {'confidence': None, 'word': u'we'}]
+bleh = cc.createGroups(results)
+dar = cc. createSum(bleh)

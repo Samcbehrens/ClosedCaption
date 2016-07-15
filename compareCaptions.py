@@ -86,28 +86,35 @@ def chooseCorrectWord(ArrayDictionaries):
 	if(all(x==singleWords[0] for x in singleWords)):
 		 return singleWords[0]
 	else: 
-		itemsByWord = collection.defaultdict(list)
-
-	for item in ArrayDictionaries:
-		itemsByWord[item['word']].append(item)
-
-	if (singleWords.count(None)>3):
-		return None
+		if (singleWords.count(None)>3):
+			return None
+		else:
+			grouped = createGroups(ArrayDictionaries);
+			findWords = createSum(grouped)
+			chosen = sorted(findWords, key = lambda k:k['sum']) 
+			chosen = chosen[0]
 
 def createGroups(ArrayDictionaries): 
-	itemsByWord = collection.defaultdict(list)
+	itemsByWord = collections.defaultdict(list)
 	for item  in ArrayDictionaries:
 		itemsByWord[item['word']].append(item)
 	return itemsByWord
 
 def createSum(groupedItems): 
-	wieghtedAvg = [0] * len(groupedItems) 
-	counter = 0; 
+	wieghtedAvg = []
+	counter = -1; 
 
 	for k,v in groupedItems.iteritems():
 		counter = counter+1;
+		l = {"word": k, "sum": 0}
+		wieghtedAvg.append(l)
+
 		print counter 
 		for item in v: 
-			wieghtedAvg[counter] = wieghtedAvg[counter] + item['confidence']
-
-
+			print wieghtedAvg
+			if item['confidence'] == None:
+				item['confidence'] = 0
+			wieghtedAvg[counter]['sum'] = wieghtedAvg[counter]['sum'] + float(item['confidence'])
+			print wieghtedAvg
+		counter = 0;
+	return wieghtedAvg
