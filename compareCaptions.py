@@ -21,7 +21,10 @@ def createDictionary(results, confidence):
 	diction = {"word": None , "confidence": None}
 	for n in results:
 		diction["word"] = n
-		diction["confidence"] = confidence
+		if confidence != None:
+			diction["confidence"] = confidence
+		else: 
+			diction["confidence"] = "0"
 		newResults.append(diction)
 		diction = {"word": None , "confidence": None}
 	return newResults  
@@ -73,6 +76,8 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 	for bigIndex, array in enumerate(apiWordArray):
 		for littleIndex, item in enumerate(array):
 			words[littleIndex][bigIndex] = item 
+
+	words = [[{'word':'',  'confidence': 1.0} if x is None else x for x in c] for c in words]	
 	print words
 	
 	finalWords = [];
@@ -81,6 +86,7 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 		finalWords.append(chosenWord)
 
 def chooseCorrectWord(ArrayDictionaries):
+	print ArrayDictionaries
 	singleWords = [d['word'] for d in ArrayDictionaries]
 
 	if(all(x==singleWords[0] for x in singleWords)):

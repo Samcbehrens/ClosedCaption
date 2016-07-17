@@ -1,3 +1,4 @@
+import compareCaptions as cc 
 wit = {u'WARNING': u'DEPRECATED',
  u'_text': u'we want to be as happy as a lady wearing a chewbacca mouse',
  u'msg_id': u'e26f64bc-7810-4ced-bb1d-da6513d9af26',
@@ -5,7 +6,7 @@ wit = {u'WARNING': u'DEPRECATED',
                 u'confidence': None,
                 u'entities': {},
                 u'intent': u'default_intent'}]}
-bing= = {u'header': {u'lexical': u'i wanna be as happy as that lady wearing the chewbacca mask',
+bing= {u'header': {u'lexical': u'i wanna be as happy as that lady wearing the chewbacca mask',
              u'name': u'I wanna be as happy as that lady wearing the chewbacca mask',
              u'properties': {u'HIGHCONF': u'1',
                              u'requestid': u'67a7452f-33f7-4894-ab21-9ec7204f69ab'},
