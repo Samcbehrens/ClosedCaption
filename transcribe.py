@@ -6,7 +6,7 @@ import parseResponse as p
 from pprint import pprint
 from parseResponse import parse
 import createSubtitles as sub
-import compareCaptions as comp
+import compareCaptions as cc
 
 def setupForTrans(audioFileName,r):
 	audioFile = core.setAudioFile(audioFileName)
@@ -37,14 +37,25 @@ if __name__ == "__main__":
 	IBMUsername = yaml.safe_load(data["service"]["IBM"]["username"])
 	IBMPassword = yaml.safe_load(data["service"]["IBM"]["password"])
 	ibmResults = core.IBM(IBMUsername, IBMPassword, r, audioSource, True)
+	print "IBM results"
+	print ibmResults
 
-	results = comp.compareResults(witResults, bingResults, aiResults, ibmResults);
-	
-	# parsed = parse(results)
+	results = cc.compareResults(witResults, bingResults, aiResults, ibmResults);
+	split = results.split(" ");
 
-	# captionFile = "test.srt"
-	# finalTranscript = sub.createTranscript(parsed, captionFile)
+	print "compiled sentence "
+	print results
 
-	# mOps.addCaptionToVideo(videoFile, captionFile, "newFile.mp4")
+	parsed = parse(ibmResults, split)
+
+	print "parsed IBM stuff"
+	print parsed
+
+
+
+	captionFile = "test.srt"
+	finalTranscript = sub.createTranscript(parsed, captionFile)
+
+	mOps.addCaptionToVideo(videoFile, captionFile, "newFile.mp4")
 
 

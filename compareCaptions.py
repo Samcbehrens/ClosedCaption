@@ -1,5 +1,6 @@
 from itertools import groupby
 import collections
+import spellChecker as sp
 
 def getIBMObjects(ibmResults):
 	result = {"transcript" : ibmResults['results'][0]['alternatives'][0]['transcript'], "confidence": ibmResults['results'][0]['alternatives'][0]['confidence'], "wordConfidence" : ibmResults['results'][0]['alternatives'][0]['word_confidence'] }
@@ -77,31 +78,32 @@ def compareResults(witResults, bingResults, aiResults, ibmResults):
 		for littleIndex, item in enumerate(array):
 			words[littleIndex][bigIndex] = item 
 
-	words = [[{'word':'',  'confidence': 1.0} if x is None else x for x in c] for c in words]	
-	print words
+	words = [[{'word':' ',  'confidence': 1.0} if x is None else x for x in c] for c in words]	
 	
 	finalWords = [];
 	for wordGroup in words:
 		chosenWord = chooseCorrectWord(wordGroup)
+		chosenWord = chosenWord['word']
 		finalWords.append(chosenWord)
 
+	finalWords = " ".join(finalWords).rstrip()
+	print "finalArray"
+	print finalWords
+	finalWords = sp.checkGrammar(finalWords)
+	return finalWords
+
 def chooseCorrectWord(ArrayDictionaries):
-	print ArrayDictionaries
 	singleWords = [d['word'] for d in ArrayDictionaries]
 
 	if(all(x==singleWords[0] for x in singleWords)):
-		 return singleWords[0]
+		return singleWords[0]
 	else: 
-		if (singleWords.count(None)>3):
-			return None
-		else:
-			grouped = createGroups(ArrayDictionaries);
-			findWords = createSum(grouped)
-			print findWords
-			chosen = sorted(findWords, key = lambda k:k['sum']) 
-			chosen = chosen[0]
-			print chosen['word'] 
-			return chosen
+		grouped = createGroups(ArrayDictionaries);
+		findWords = createSum(grouped)
+		chosen = sorted(findWords, key = lambda k:k['sum'], reverse = True ) 
+		chosen = chosen[0]
+		return chosen
+
 def createGroups(ArrayDictionaries): 
 	itemsByWord = collections.defaultdict(list)
 	for item  in ArrayDictionaries:
@@ -117,12 +119,9 @@ def createSum(groupedItems):
 		l = {"word": k, "sum": 0}
 		wieghtedAvg.append(l)
 
-		print counter 
 		for item in v: 
-			print wieghtedAvg
 			if item['confidence'] == None:
 				item['confidence'] = 0
 			wieghtedAvg[counter]['sum'] = wieghtedAvg[counter]['sum'] + float(item['confidence'])
-			print wieghtedAvg
 		counter = 0;
 	return wieghtedAvg
