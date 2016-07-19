@@ -15,28 +15,42 @@ def parse(postResponse, finalSentence):
 	subtitleArray = []
 	startTime = 0
 
+	print "postResponse Length"
+	print len(postResponse) 
+
+	print "finalSentence length"
+	print len(finalSentence)
+
 	for i in range(len(finalSentence)):
-		
-		print "what is this"
-		print postResponse[i][0]
+		print "current index"
+		print i
 
 		if i % 5 == 0:
 			
 			sentence = sentence+ " " + finalSentence[i]
-
+			print "current word"
+			print finalSentence[i]
+			print "startTime"
+			print startTime
+			print "endTime"
+			print postResponse[i][2]
 			subtitleObject = createSubObject(sentence, startTime,postResponse[i][2] )
 			subtitleArray.append(subtitleObject)
 
 			sentence = ""
 
-		elif i == len(postResponse)-1:
-		
+		elif i == len(finalSentence)-1:
+			print "in elif"
 			sentence = sentence+ " " + finalSentence[i]
 			addToSentence(subtitleArray, sentence)
 
-		else:
-			
+		elif i%5 ==1: 
 			startTime = postResponse[i][1]
+			sentence = sentence+ " " + finalSentence[i]
+		else:
+			print "in else"
+			print i 
+			print finalSentence[i]
 			sentence = sentence+ " " + finalSentence[i]
 			
 	print "subtitleArray"
